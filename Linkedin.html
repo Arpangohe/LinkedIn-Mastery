@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered LinkedIn Mastery</title>
+    <style>
+        :root {
+            --primary: #0077B5;
+            --primary-light: #0095ff;
+            --secondary: #00a0dc;
+            --dark: #283e4a;
+            --light: #f3f6f8;
+            --accent: #00ffff;
+            --gradient-start: #0073b1;
+            --gradient-end: #00b3e0;
+            --dark-gradient-start: #1a1a2e;
+            --dark-gradient-end: #16213e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            
+        }
+        
+        body {
+            background-color: #080f1f;
+            color: white;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #0c1524 0%, #16213e 100%);
+            background-attachment: fixed;
+        }
+        
+        .glow {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+        }
+        
+        .glow-1 {
+            top: 10%;
+            left: 0;
+            background: rgba(0, 119, 181, 0.2);
+        }
+        
+        .glow-2 {
+            bottom: 20%;
+            right: 0;
+            background: rgba(0, 255, 255, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            background: linear-gradient(90deg, var(--dark-gradient-start), var(--dark-gradient-end));
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .logo span {
+            color: var(--accent);
+            margin-left: 0.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(0, 160, 220, 0.1) 0%, rgba(8, 15, 31, 0) 70%);
+            z-index: -1;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, white, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+            max-width: 800px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 119, 181, 0.4);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(0, 119, 181, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--accent);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .ai-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: white;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -0.8rem;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        .section-title-price{
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: white;
+            position: relative;
+            display: inline-block;
+            left: 22%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title-price::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -0.8rem;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .features {
+            padding: 6rem 0;
+            position: relative;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .feature-card {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 15px;
+            padding: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 160, 220, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            background: rgba(0, 255, 255, 0.1);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+        }
+        
+        .stats {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, rgba(24, 32, 79, 0.7), rgba(24, 32, 79, 0.4));
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .stat-card h3 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card p {
+            color: var(--accent);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        .how-it-works {
+            padding: 6rem 0;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            padding: 2rem 0;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 3rem;
+            text-align: right;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 3rem;
+            text-align: left;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            top: 2.5rem;
+            border: 4px solid var(--dark);
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -14px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -14px;
+        }
+        
+        .timeline-content {
+            padding: 1.5rem;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .timeline-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        
+        .timeline-content p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .pricing {
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .price-card {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .price-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+        
+        .price {
+            font-size: 4rem;
+            font-weight: bold;
+            color: white;
+            margin: 1.5rem 0;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .price::before {
+            content: 'INR';
+            position: absolute;
+            top: 0.5rem;
+            left: -1.5rem;
+            font-size: 1rem;
+            color: var(--accent);
+        }
+        
+        .features-list {
+            text-align: left;
+            margin: 2rem 0;
+        }
+        
+        .features-list li {
+            margin-bottom: 1rem;
+            list-style-type: none;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+        }
+        
+        .features-list li::before {
+            content: "✓";
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        .promo-section {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .promo-section input {
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            width: 200px;
+            font-size: 1rem;
+            color: white;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .promo-section input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+        
+        .promo-section button {
+            padding: 1rem 1.5rem;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .promo-section button:hover {
+            box-shadow: 0 4px 15px rgba(0, 119, 181, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .success-message {
+            color: var(--accent);
+            font-weight: bold;
+            margin-top: 1rem;
+            display: none;
+            width: 100%;
+        }
+        
+        .ai-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(0, 255, 255, 0.1);
+            color: var(--accent);
+            border-radius: 50px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        footer {
+            background: var(--dark-gradient-start);
+            padding: 4rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        @media (max-width: 992px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .timeline::after {
+                left: 2rem;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 4rem;
+                padding-right: 1rem;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(odd) {
+                left: 0;
+                padding-right: 1rem;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 0.5rem;
+            }
+            
+            .timeline-item:nth-child(odd)::after {
+                right: auto;
+                left: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-delay {
+            animation: float 6s ease-in-out 2s infinite;
+        }
+
+        .hero-image {
+            max-width: 100%;
+            margin-top: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 160, 220, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">AI-LinkedIn<span>Mastery</span></div>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">Process</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="ai-badge">AI-POWERED</div>
+                <h1>Unlock Unlimited LinkedIn Potential</h1>
+                <h2 style="margin-left: 190px;">Leverage Advanced AI to Transform Your Profile, Generate Quality Leads & Secure Your Dream Job</h2>
+                <p style="margin-left: 190px;" >Join our cutting-edge workshop where AI meets personal branding to revolutionize your LinkedIn presence and open doors to unprecedented opportunities.</p>
+                <a href="#pricing" class="btn btn-primary">Reserve Your Spot</a>
+            </div>
+            <img src="https://res.cloudinary.com/dnz5ya53b/image/upload/v1743695832/growthschoolio_cover_txbeih.webp" alt="AI LinkedIn Optimization" class="hero-image floating">
+        </section>
+        
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Unlock These Powerful Benefits</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3>AI-Powered Profile Optimization</h3>
+                        <p>Our proprietary AI algorithms analyze and enhance your profile to maximize visibility to recruiters and potential clients, resulting in up to 300% more profile views.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Unlimited Lead Generation</h3>
+                        <p>Discover our AI-driven lead generation system that identifies and connects with high-quality prospects at scale, creating a consistent flow of opportunities.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💼</div>
+                        <h3>Unlimited Job Opportunities</h3>
+                        <p>Our AI job-matching technology pairs your skills with hidden job markets and puts your application at the top of recruiters' lists.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👑</div>
+                        <h3>Personal Brand Amplification</h3>
+                        <p>Leverage AI content creation tools to establish yourself as a thought leader with engaging posts that drive massive engagement.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>AI Analytics Dashboard</h3>
+                        <p>Track your LinkedIn growth with our proprietary analytics that measure engagement, connection quality, and conversion rates.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Future-Proof Networking</h3>
+                        <p>Master AI-assisted networking techniques that build authentic relationships with industry leaders, creating long-term career opportunities.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>300%</h3>
+                        <p>Profile Visibility Increase</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>10X</h3>
+                        <p>Lead Generation Growth</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>85%</h3>
+                        <p>Job Interview Success Rate</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>5000+</h3>
+                        <p>Success Stories</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <h2 class="section-title">Our AI-Powered Process</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Profile Analysis</h3>
+                            <p>Our AI scans your current LinkedIn profile and compares it against top performers in your industry to identify optimization opportunities.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Strategic Optimization</h3>
+                            <p>We implement data-driven changes to your headline, about section, experience, and skills to maximize visibility to your target audience.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Content Strategy</h3>
+                            <p>Our AI content generator creates a personalized posting schedule with industry-relevant topics that position you as a thought leader.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Lead Generation System</h3>
+                            <p>Deploy our automated outreach system with personalized AI-written messages that convert connections into conversations and opportunities.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Performance Analytics</h3>
+                            <p>Track your growth with real-time metrics and AI-driven recommendations to continuously improve your LinkedIn strategy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="pricing" class="pricing">
+            <div class="container">
+                <h2 class="section-title-price">Investment in Your Future</h2>
+                <div class="price-card">
+                    <div class="ai-badge">EXCLUSIVE ACCESS</div>
+                    <h3>AI-LinkedIn Mastery Workshop</h3>
+                    <div class="price">499</div>
+                    <p>Unlock the full power of AI-driven LinkedIn optimization</p>
+                    
+                    <ul class="features-list">
+                        <li>3-Hour AI-LinkedIn Mastery Online Workshop: Enhance Your Profile and Networking with AI-Powered Tools</li>
+                        <li>AI-Enhanced Profile Optimization: Headline & Summary Generation, SEO for LinkedIn, and AI-based Resume & Cover Letter Assistance</li>
+                        <li>AI-Powered Content Strategy: Generating Viral LinkedIn Posts, Hashtag & Trend Analysis, and Automating Post Scheduling</li>
+                        <li>AI for Smart Networking: Personalized Connection Requests, AI-Based Engagement Strategies, and Finding Job Opportunities with AI</li>
+                        <li>Hands-On Activities: Live AI Profile Audit, AI Post Creation Challenge, and Networking Automation</li>
+                        <li>Access to AI Tools and Features: ChatGPT, Jasper, Canva AI, DALL·E, LinkedIn Sales Navigator, AI Analytics, Resume Worded, and Rezi</li>
+                        <li>Online 1-on-1 Strategy Session with LinkedIn Expert to Review Progress and Provide Personalized Feedback</li>
+                        <li>Lifetime Access to Private Community for Ongoing Support and AI-LinkedIn Mastery</li>
+                    </ul>
+                    
+                    <div class="promo-section">
+                        <input type="text" id="promo-code" placeholder="Promo Code">
+                        <button id="apply-promo">Apply</button>
+                        <div id="promo-success" class="success-message">Promo code applied successfully!</div>
+                    </div>
+                    
+                    <a href="https://rzp.io/rzp/linkedinworkshopbyarpan" id="payment-button" class="btn btn-primary">Secure Your Access Now</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>AI-LinkedIn Mastery</h3>
+                    <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 1rem;">Transform your LinkedIn presence with cutting-edge AI technology and proven strategies.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">Our Process</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Free LinkedIn Guide</a></li>
+                        <li><a href="#">AI Tools Overview</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="mailto:techrooottechnology@gmail.com">techrooottechnology@gmail.com</a></li>
+                        <li><a href="tel:+918962427126">+91 - 8962427126</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2024 TechRooot Technology. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const promoButton = document.getElementById('apply-promo');
+        //     const promoInput = document.getElementById('promo-code');
+        //     const paymentButton = document.getElementById('payment-button');
+        //     const promoSuccess = document.getElementById('promo-success');
+            
+        //     // Define promo codes and their corresponding payment links
+        //     const promoCodes = {
+        //         'AIEARLYBIRD': 'https://paymentlink.com/early-bird',
+        //         'KAUR10': 'https://rzp.io/rzp/Kaur10',
+        //         'FUTUREAI25': 'https://paymentlink.com/future-discount',
+        //         'LEADSBOOST': 'https://paymentlink.com/leads-special',
+        //         'BRANDHACK': 'https://paymentlink.com/brand-special'
+        //     };
+            
+        //     promoButton.addEventListener('click', function() {
+        //         const promoCode = promoInput.value.trim().toUpperCase();
+                
+        //         if (promoCodes[promoCode]) {
+        //             // Valid promo code
+        //             paymentButton.href = promoCodes[promoCode];
+        //             promoSuccess.style.display = 'block';
+                    
+        //             // Update button text to reflect discount
+        //         }
+        //     });
+        // });
+        document.addEventListener('DOMContentLoaded', function() {
+    const promoButton = document.getElementById('apply-promo');
+    const promoInput = document.getElementById('promo-code');
+    const paymentButton = document.getElementById('payment-button');
+    const promoSuccess = document.getElementById('promo-success');
+    const priceElement = document.querySelector('.price');
+    
+    // Define promo codes and their corresponding payment links
+    const promoCodes = {
+        'AIEARLYBIRD': 'https://paymentlink.com/early-bird',
+        'KAUR10': 'https://rzp.io/rzp/Kaur10',
+        'FUTUREAI25': 'https://paymentlink.com/future-discount',
+        'LEADSBOOST': 'https://paymentlink.com/leads-special',
+        'BRANDHACK': 'https://paymentlink.com/brand-special'
+    };
+    
+    promoButton.addEventListener('click', function() {
+        const promoCode = promoInput.value.trim().toUpperCase();
+        
+        if (promoCodes[promoCode]) {
+            // Valid promo code
+            paymentButton.href = promoCodes[promoCode];
+            promoSuccess.style.display = 'block';
+            
+            // Update price to 449
+            priceElement.textContent = '449';
+            
+            // Update button text to reflect discount
+            paymentButton.textContent = 'Secure Your Discounted Access Now';
+        }
+    });
+});
+    </script>
+</body>
+</html>
